@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartGrow — Indoor Hydroponic Growing System</title>
+<meta name="description" content="SmartGrow — automated indoor hydroponic growing system. Fresh herbs, greens and plants indoors with smart control.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0A1710">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SmartGrow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SmartGrow — Indoor Hydroponic Growing System">
+<meta property="og:description" content="Grow fresh. Grow smart. An automated indoor hydroponic growing system.">
+<meta property="og:image" content="images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:#2D6A4F;color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#FAF8F3}
+::-webkit-scrollbar-thumb{background:#c9c5ba;border-radius:4px}
+html{scroll-padding-top:80px}
+
+/* ═══ REDUCED MOTION ═══ */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.mq-track{animation:none!important}}
+
+/* ═══ HERO CINEMATIC ═══ */
+@keyframes heroImg{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1)}}
+@keyframes heroUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.h-img{animation:heroImg 1.8s cubic-bezier(.25,.46,.45,.94) 0s both}
+.h-badge{animation:heroUp .7s cubic-bezier(.16,1,.3,1) .45s both}
+.h-title{animation:heroUp .8s cubic-bezier(.16,1,.3,1) .7s both}
+.h-sub{animation:heroUp .8s cubic-bezier(.16,1,.3,1) .95s both}
+.h-desc{animation:heroUp .8s cubic-bezier(.16,1,.3,1) 1.2s both}
+.h-cta{animation:heroUp .8s cubic-bezier(.16,1,.3,1) 1.45s both}
+.h-line{transform-origin:center;animation:heroLine .7s cubic-bezier(.16,1,.3,1) 1.05s both}
+
+/* ═══ FLOATING LEAVES (hero ambience) ═══ */
+@keyframes drift1{0%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(14px,-22px) rotate(12deg)}100%{transform:translate(0,0) rotate(0deg)}}
+@keyframes drift2{0%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-18px,-14px) rotate(-10deg)}100%{transform:translate(0,0) rotate(0deg)}}
+@keyframes drift3{0%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(10px,18px) rotate(8deg)}100%{transform:translate(0,0) rotate(0deg)}}
+.leaf{position:absolute;pointer-events:none;opacity:.16;color:#95D5B2;filter:blur(.4px)}
+.leaf svg{width:100%;height:100%}
+.leaf:nth-child(1){top:18%;left:8%;width:26px;height:26px;animation:drift1 11s ease-in-out infinite}
+.leaf:nth-child(2){top:30%;right:10%;width:20px;height:20px;animation:drift2 13s ease-in-out infinite}
+.leaf:nth-child(3){top:64%;left:14%;width:16px;height:16px;animation:drift3 9s ease-in-out infinite}
+.leaf:nth-child(4){top:74%;right:16%;width:24px;height:24px;animation:drift1 14s ease-in-out infinite;animation-delay:-4s}
+.leaf:nth-child(5){top:44%;left:24%;width:12px;height:12px;animation:drift2 10s ease-in-out infinite;animation-delay:-2s}
+.leaf:nth-child(6){top:22%;right:26%;width:14px;height:14px;animation:drift3 12s ease-in-out infinite;animation-delay:-6s}
+
+/* ═══ SCROLL REVEAL ═══ */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:translateY(0)}
+.rv-s{opacity:0;transform:scale(.94);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv-s.on{opacity:1;transform:scale(1)}
+.rv-l{opacity:0;transform:translateX(-50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-l.on{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv-r.on{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
+
+/* ═══ NAV ═══ */
+.nav-wrap{transition:background .5s,box-shadow .5s,backdrop-filter .5s}
+.nav-solid{background:rgba(250,248,243,.9)!important;backdrop-filter:blur(20px)!important;box-shadow:0 1px 0 rgba(0,0,0,.06)!important}
+
+/* ═══ MOBILE MENU ═══ */
+.menu-overlay{position:fixed;inset:0;z-index:60;background:#0A1710;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.menu-open .menu-overlay{opacity:1;pointer-events:all}
+.menu-panel{position:fixed;top:0;right:0;bottom:0;width:85%;max-width:360px;z-index:61;background:#0A1710;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);padding:80px 32px 32px;display:flex;flex-direction:column;gap:8px}
+.menu-open .menu-panel{transform:translateX(0)}
+.menu-link{font-family:'Fraunces',serif;font-size:30px;font-weight:400;color:rgba(255,255,255,.72);letter-spacing:-.01em;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .3s,padding-left .3s}
+.menu-link:hover{color:#95D5B2;padding-left:8px}
+
+/* ═══ BACK TO TOP — leaf ring (signature, out of the way) ═══
+   A leaf inside a ring that fills green as you scroll.
+   Doubles as a back-to-top button. Appears after a little scrolling. */
+#toTop{position:fixed;bottom:22px;left:16px;z-index:50;width:48px;height:48px;border-radius:50%;background:rgba(250,248,243,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(12,26,18,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+#toTop.show{opacity:1;transform:translateY(0);pointer-events:all}
+#toTop .ring{position:absolute;inset:0;transform:rotate(-90deg)}
+#toTop .ring circle{fill:none;stroke-width:3}
+#toTop .ring .bg{stroke:rgba(45,106,79,.15)}
+#toTop .ring .fg{stroke:#2D6A4F;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126}
+#toTop .lf{width:18px;height:18px;color:#2D6A4F;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+#toTop:hover .lf{transform:translateY(-2px) scale(1.12)}
+
+/* ═══ MARQUEE ═══ */
+.mq{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;align-items:center;width:max-content;animation:mqMove 36s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mqMove{to{transform:translateX(-50%)}}
+.mq-item{display:flex;align-items:center;gap:22px;padding-right:22px;white-space:nowrap}
+
+/* ═══ IMAGE REVEAL ═══ */
+.img-reveal{position:relative;overflow:hidden}
+.img-reveal img{transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .6s ease}
+.img-reveal:hover img{transform:scale(1.045)}
+
+/* ═══ BUTTONS ═══ */
+.btn-primary{position:relative;overflow:hidden;transition:all .35s cubic-bezier(.16,1,.3,1)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(45,106,79,.28)}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-120%);transition:transform .6s ease}
+.btn-primary:hover::after{transform:translateX(120%)}
+.btn-wa{transition:all .35s cubic-bezier(.16,1,.3,1)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.32)}
+
+/* ═══ LINK UNDERLINE ═══ */
+.link-line{position:relative}
+.link-line::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:currentColor;transition:width .35s cubic-bezier(.16,1,.3,1)}
+.link-line:hover::after{width:100%}
+
+/* ═══ FEATURE CARD MICRO-INTERACTIONS ═══ */
+.feat{transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s}
+.feat:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(12,26,18,.08);border-color:#5A9E7C55}
+.feat svg{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.feat:hover svg{transform:scale(1.15) rotate(-4deg)}
+
+/* ═══ GALLERY ═══ */
+.gal-item{overflow:hidden;border-radius:12px;cursor:pointer;position:relative}
+.gal-item img{transition:transform .7s cubic-bezier(.16,1,.3,1);width:100%;height:100%;object-fit:cover;display:block}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item:focus-visible{outline:2px solid #2D6A4F;outline-offset:3px}
+.gal-item .gal-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,23,16,.72) 0%,transparent 50%);opacity:0;transition:opacity .4s}
+.gal-item:hover .gal-over{opacity:1}
+.gal-item .gal-cap{position:absolute;bottom:0;left:0;right:0;padding:16px;transform:translateY(8px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.gal-item:hover .gal-cap{transform:translateY(0);opacity:1}
+
+/* ═══ LIGHTBOX ═══ */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(7,14,9,.96);opacity:0;pointer-events:none;transition:opacity .35s;overflow-y:auto}
+.lb.open{opacity:1;pointer-events:all}
+.lb-img{transition:opacity .3s,transform .3s}
+
+/* ═══ PHONE MOCKUP ═══ */
+.phone{position:relative;background:#1a1a1a;border-radius:40px;padding:10px;box-shadow:0 0 0 1px #333,0 30px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
+.phone::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:70px;height:22px;background:#1a1a1a;border-radius:11px;z-index:4}
+.phone::after{content:'';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:100px;height:4px;background:#333;border-radius:4px;z-index:4}
+.phone-screen{border-radius:30px;overflow:hidden;position:relative;background:#111}
+.phone-screen img{width:100%;display:block}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.float-a{animation:floaty 6s ease-in-out infinite}
+.float-b{animation:floaty 7s ease-in-out infinite;animation-delay:-3s}
+.phone-glow{position:absolute;inset:-10%;background:radial-gradient(closest-side,rgba(149,213,178,.16),transparent 70%);z-index:-1;border-radius:50%}
+
+/* ═══ WHATSAPP FLOAT ═══ */
+@keyframes waSoft{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.35)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+.wa-btn{animation:waSoft 3s ease-in-out infinite;transition:transform .3s,box-shadow .3s}
+.wa-btn:hover{transform:scale(1.1)}
+
+/* ═══ FORMULA ═══ */
+@keyframes formulaIn{from{opacity:0;transform:translateY(16px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+.formula-el{opacity:0;animation:formulaIn .6s cubic-bezier(.16,1,.3,1) both}
+
+
+/* ═══ SECTION EYEBROW LEAF ═══ */
+.eyebrow{display:inline-flex;align-items:center;gap:8px}
+.eyebrow svg{width:12px;height:12px}
+</style>
+</head>
+<body class="font-sans bg-sg-cream text-sg-ink antialiased overflow-x-hidden">
+
+<!-- Shared WhatsApp icon -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="ic-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.05-.669.15-.198.199-.771.964-.942 1.164-.17.199-.343.199-.64.05-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.678-2.06-.198-.299-.022-.46.135-.61.14-.14.31-.348.465-.523.155-.174.207-.299.31-.498.104-.198.06-.372-.03-.523-.09-.149-.69-1.67-1.01-2.28-.31-.6-.633-.523-.81-.523-.17 0-.372-.01-.572-.01s-.523.05-.806.31c-.284.27-1.085 1.087-1.085 2.646 0 1.558 1.132 3.066 1.29 3.276.159.21 2.234 3.614 5.418 4.88.759.327 1.354.523 1.815.669.763.24 1.456.207 1.976.126.523-.09 1.668-.68 1.906-1.344.24-.66.24-1.224.17-1.344-.07-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.86 9.86 0 01-5.032-1.378l-.361-.214-3.741.981.998-3.648-.235-.374a9.86 9.86 0 01-1.513-5.27c.001-5.446 4.435-9.88 9.888-9.88 2.64 0 5.122 1.03 6.988 2.9a9.825 9.825 0 012.9 6.974c-.003 5.447-4.437 9.882-9.886 9.882m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c.001 2.095.546 4.14 1.586 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol><symbol id="ic-leaf" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C7 8 4 12 4 15.5A6.5 6.5 0 0 0 10.5 22c3.5 0 7.5-3 9.5-8-1 .5-2.6 1-4.5 1C18 11 17 6 12 3zm-1 6.5c.3 2.6-.4 5.8-2.6 8.7l-.8-.6c2-2.7 2.7-5.6 2.4-8l1-.1z"/></symbol></svg>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav" class="nav-wrap fixed top-0 inset-x-0 z-50 px-5 lg:px-10 py-4 flex items-center justify-between bg-transparent">
+    <a href="#hero" class="flex items-center gap-2.5 z-10" aria-label="SmartGrow Home">
+        <div class="w-8 h-8 rounded-lg bg-sg-pine flex items-center justify-center"><svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2 2 3.4-.8 1.1-2 1.8-3.4 2C6.2 12.4 5.5 9 9.5 9.4z"/><path d="M14.5 9.4c-1.1.8-1.8 2-2 3.4.8 1.1 2 1.8 3.4 2 1.9-2.4 2.6-5.8-1.4-5.4z"/></svg></div>
+        <span id="nav-logo" class="text-[13px] font-semibold tracking-[.14em] uppercase text-white transition-colors duration-500">SmartGrow</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+        <a href="#system" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">System</a>
+        <a href="#plants" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">Plants</a>
+        <a href="#automation" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">Automation</a>
+        <a href="#installations" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">Installations</a>
+        <a href="#gallery" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">Gallery</a>
+        <a href="#contact" class="link-line text-[11px] font-medium tracking-[.12em] uppercase text-white/60 hover:text-white transition-colors nav-lk">Contact</a>
+    </div>
+    <div class="flex items-center gap-3 z-10">
+        <a href="https://wa.me/919370023258?text=Hi%20SmartGrow!" target="_blank" rel="noopener" class="hidden sm:flex btn-wa items-center gap-2 bg-[#25D366] text-white text-[10px] font-semibold tracking-wider uppercase px-4 py-2.5 rounded-full">
+            <svg class="w-3.5 h-3.5"><use href="#ic-wa"/></svg>
+            WhatsApp
+        </a>
+        <button id="menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center" aria-label="Menu" aria-expanded="false" aria-controls="menu-panel">
+            <div class="space-y-1.5" id="menu-icon">
+                <span class="block w-5 h-px bg-white transition-all duration-300 origin-center" id="bar1"></span>
+                <span class="block w-5 h-px bg-white transition-all duration-300" id="bar2"></span>
+            </div>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="menu-overlay" id="menu-overlay"></div>
+<div class="menu-panel" id="menu-panel">
+    <a href="#system" class="menu-link" onclick="closeMenu()">System</a>
+    <a href="#plants" class="menu-link" onclick="closeMenu()">Plants</a>
+    <a href="#grow" class="menu-link" onclick="closeMenu()">What to grow</a>
+    <a href="#automation" class="menu-link" onclick="closeMenu()">Automation</a>
+    <a href="#installations" class="menu-link" onclick="closeMenu()">Installations</a>
+    <a href="#gallery" class="menu-link" onclick="closeMenu()">Gallery</a>
+    <a href="#contact" class="menu-link" onclick="closeMenu()">Contact</a>
+    <div class="mt-8">
+        <a href="https://wa.me/919370023258?text=Hi%20SmartGrow!" target="_blank" rel="noopener" class="btn-wa inline-flex items-center gap-2 bg-[#25D366] text-white text-xs font-semibold tracking-wider uppercase px-6 py-3 rounded-full">
+            <svg class="w-4 h-4"><use href="#ic-wa"/></svg>
+            WhatsApp SmartGrow
+        </a>
+    </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0" id="hero-par" style="will-change:transform">
+        <img src="images/hero.jpg" alt="SmartGrow Indoor Hydroponic System" class="h-img w-full h-full object-cover" fetchpriority="high" width="1600" height="900" />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0A1710]/65 via-[#0A1710]/40 to-[#0A1710]/80"></div>
+    </div>
+    <!-- ambient drifting leaves -->
+    <div class="absolute inset-0 z-[5]" aria-hidden="true">
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+        <span class="leaf"><svg><use href="#ic-leaf"/></svg></span>
+    </div>
+    <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        <div class="h-badge inline-flex items-center gap-2.5 border border-white/[.12] rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm bg-white/5">
+            <div class="w-1.5 h-1.5 rounded-full bg-sg-sage"></div>
+            <span class="text-[10px] font-semibold tracking-[.16em] uppercase text-white/70">Indoor Hydroponic System</span>
+        </div>
+        <h1 class="h-title font-display text-[3.4rem] sm:text-7xl md:text-8xl font-medium tracking-tight text-white leading-[1]">Smart<span class="text-sg-mint">Grow</span></h1>
+        <div class="h-line w-12 h-px bg-sg-sage/60 mx-auto mt-7 mb-6"></div>
+        <p class="h-sub font-display italic font-light text-2xl sm:text-3xl md:text-4xl text-white/90 tracking-tight">Grow fresh. Grow smart.</p>
+        <p class="h-desc mt-5 text-sm font-light text-white/45 max-w-md mx-auto leading-relaxed">An automated indoor hydroponic growing system that brings fresh growing into your space.</p>
+        <div class="h-cta mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="#system" class="btn-primary w-full sm:w-auto bg-white text-sg-forest text-[11px] font-semibold tracking-[.12em] uppercase px-8 py-3.5 rounded-full text-center">Explore SmartGrow</a>
+            <a href="https://wa.me/919370023258?text=Hi%20SmartGrow!%20I%27d%20like%20to%20learn%20more." target="_blank" rel="noopener" class="btn-wa w-full sm:w-auto bg-[#25D366] text-white text-[11px] font-semibold tracking-[.12em] uppercase px-8 py-3.5 rounded-full flex items-center justify-center gap-2">
+                <svg class="w-4 h-4"><use href="#ic-wa"/></svg>
+                WhatsApp Us
+            </a>
+        </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10" style="animation:heroUp .6s cubic-bezier(.16,1,.3,1) 2.1s both">
+        <svg class="w-5 h-5 text-white/25 animate-bounce" style="animation-duration:2.4s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+</section>
+
+<!-- ═══ MARQUEE — the garden, in one line ═══ -->
+<div class="mq bg-sg-deep border-y border-white/5 py-4 select-none" aria-hidden="true">
+    <div class="mq-track" id="mq-track">
+        <!-- content duplicated by JS for seamless loop -->
+    </div>
+</div>
+
+<!-- ═══ SYSTEM ═══ -->
+<section id="system" class="py-20 md:py-32 px-5 md:px-10 bg-sg-cream">
+    <div class="max-w-6xl mx-auto">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-sage"><svg class="text-sg-sage"><use href="#ic-leaf"/></svg>Our System</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-sg-deep leading-[1.05] max-w-xl">The SmartGrow<br><span class="italic text-sg-pine">system</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-sg-charcoal max-w-md leading-relaxed">A real product. Real engineering. Designed to grow real plants indoors.</p>
+        <div class="rv-s mt-10 img-reveal rounded-2xl overflow-hidden shadow-2xl shadow-sg-deep/10">
+            <img src="images/system-unit.jpg" alt="SmartGrow Hydroponic Growing Unit" class="w-full aspect-[16/10] object-cover" loading="lazy" decoding="async" width="1200" height="750" />
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+            <div class="rv d1 feat p-5 rounded-xl border border-sg-sand bg-white/70"><svg class="w-5 h-5 text-sg-pine mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h3 class="text-[13px] font-semibold text-sg-deep">Indoor</h3><p class="mt-1 text-[11px] font-light text-sg-stone">Designed for indoor spaces</p></div>
+            <div class="rv d2 feat p-5 rounded-xl border border-sg-sand bg-white/70"><svg class="w-5 h-5 text-sg-pine mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg><h3 class="text-[13px] font-semibold text-sg-deep">Hydroponic</h3><p class="mt-1 text-[11px] font-light text-sg-stone">Soil-free water-based growing</p></div>
+            <div class="rv d3 feat p-5 rounded-xl border border-sg-sand bg-white/70"><svg class="w-5 h-5 text-sg-pine mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><h3 class="text-[13px] font-semibold text-sg-deep">Automated</h3><p class="mt-1 text-[11px] font-light text-sg-stone">Runs on automated schedules</p></div>
+            <div class="rv d4 feat p-5 rounded-xl border border-sg-sand bg-white/70"><svg class="w-5 h-5 text-sg-pine mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg><h3 class="text-[13px] font-semibold text-sg-deep">Smart Control</h3><p class="mt-1 text-[11px] font-light text-sg-stone">Intelligent device management</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ REAL PLANTS ═══ -->
+<section id="plants" class="py-20 md:py-32 px-5 md:px-10 bg-sg-deep">
+    <div class="max-w-6xl mx-auto">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-mint"><svg class="text-sg-mint"><use href="#ic-leaf"/></svg>Real Results</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-white leading-[1.05]">Real plants.<br><span class="italic text-sg-mint">Real growth.</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-white/40 max-w-md leading-relaxed">Actual plants grown in SmartGrow systems. No stock photos.</p>
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+            <div class="rv md:col-span-7 md:row-span-2 img-reveal rounded-2xl overflow-hidden">
+                <img src="images/plant-basil.jpg" alt="Basil grown with SmartGrow" class="w-full h-full min-h-[300px] md:min-h-0 object-cover" loading="lazy" decoding="async" width="800" height="600" />
+                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/55 to-transparent">
+                    <h3 class="font-display text-xl font-medium text-white">Basil</h3>
+                    <span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Grown with SmartGrow</span>
+                </div>
+            </div>
+            <div class="rv d1 md:col-span-5 img-reveal rounded-2xl overflow-hidden">
+                <img src="images/plant-spinach.jpg" alt="Spinach grown with SmartGrow" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" width="600" height="450" />
+                <div class="p-4"><h3 class="font-display text-lg font-medium text-white">Spinach</h3><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Grown with SmartGrow</span></div>
+            </div>
+            <div class="rv d2 md:col-span-3 img-reveal rounded-2xl overflow-hidden">
+                <img src="images/plant-amaranthus.jpg" alt="Amaranthus grown with SmartGrow" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" width="450" height="600" />
+                <div class="p-4"><h3 class="font-display text-lg font-medium text-white">Amaranthus</h3><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Grown with SmartGrow</span></div>
+            </div>
+            <div class="rv d3 md:col-span-2 img-reveal rounded-2xl overflow-hidden">
+                <img src="images/plant-italian-basil.jpg" alt="Italian Basil grown with SmartGrow" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" width="400" height="530" />
+                <div class="p-4"><h3 class="font-display text-lg font-medium text-white">Italian Basil</h3><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Grown with SmartGrow</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ WHAT CAN YOU GROW ═══ -->
+<section id="grow" class="py-20 md:py-32 px-5 md:px-10 bg-sg-linen">
+    <div class="max-w-6xl mx-auto">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-sage"><svg class="text-sg-sage"><use href="#ic-leaf"/></svg>Plant Library</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-sg-deep leading-[1.05]">What can<br><span class="italic text-sg-pine">you grow?</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-sg-charcoal max-w-lg leading-relaxed">A wide variety of herbs, greens and plants suitable for hydroponic growing.</p>
+        <div class="mt-10 grid md:grid-cols-2 gap-5 md:gap-6 items-start">
+            <div class="rv-s">
+                <div class="img-reveal rounded-2xl overflow-hidden shadow-lg">
+                    <img src="images/tea-collection.jpg" alt="SmartGrow Tea Collection" class="w-full aspect-[16/10] object-cover" loading="lazy" decoding="async" width="800" height="500" />
+                </div>
+                <p class="mt-3 text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Tea Collection</p>
+            </div>
+            <div class="rv-s d2">
+                <div class="img-reveal rounded-2xl overflow-hidden shadow-lg">
+                    <img src="images/plant-varieties.jpg" alt="SmartGrow Plant Varieties" class="w-full aspect-[16/10] object-cover" loading="lazy" decoding="async" width="800" height="500" />
+                </div>
+                <p class="mt-3 text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Plant Varieties Available</p>
+            </div>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+            <div class="rv d1 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Tea</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Lemongrass</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Tulsi</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Krishna Tulsi</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Ajwain Leaf</span></div></div>
+            <div class="rv d2 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Fresh Drinks</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Peppermint</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Spearmint</span></div></div>
+            <div class="rv d3 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Basil</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Italian Basil</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Thai Basil</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Purple Basil</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Indian Basil</span></div></div>
+            <div class="rv d4 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Herbs</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Coriander</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Dill</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Spring Onion</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Oregano</span></div></div>
+            <div class="rv d5 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Everyday Greens</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Spinach</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Fenugreek</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Amaranth</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Bathua</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Mustard Greens</span></div></div>
+            <div class="rv d6 feat p-5 rounded-xl bg-white border border-sg-sand"><h3 class="font-display text-base font-medium text-sg-deep mb-2">Salad Greens</h3><div class="flex flex-wrap gap-1.5"><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Butterhead</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Romaine</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Rocket</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Pak Choi</span><span class="text-[11px] font-light text-sg-charcoal bg-sg-cream rounded px-2 py-0.5">Kale</span></div></div>
+        </div>
+        <p class="mt-8 text-[11px] font-light text-sg-mist rv">Varieties represent types suitable for hydroponic growing. Individual results may vary.</p>
+    </div>
+</section>
+
+<!-- ═══ HYDROPONICS ═══ -->
+<section id="hydroponics" class="py-20 md:py-32 px-5 md:px-10 bg-sg-cream">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-sage"><svg class="text-sg-sage"><use href="#ic-leaf"/></svg>How It Works</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-sg-deep leading-[1.05]">Hydroponic <span class="italic text-sg-pine">growing</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-sg-charcoal max-w-lg mx-auto leading-relaxed">No soil needed. Plants get everything they need from water and light.</p>
+        <div class="mt-14 flex flex-wrap items-center justify-center gap-4 md:gap-6" id="formula">
+            <div class="formula-el p-5 md:p-7 rounded-2xl bg-blue-50/70 border border-blue-100/80 min-w-[88px]" style="animation-delay:.2s"><svg class="w-7 h-7 text-blue-500 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg><span class="text-xs md:text-sm font-semibold text-blue-800">Water</span></div>
+            <span class="formula-el font-display text-2xl font-light text-sg-mist" style="animation-delay:.35s">+</span>
+            <div class="formula-el p-5 md:p-7 rounded-2xl bg-amber-50/70 border border-amber-100/80 min-w-[88px]" style="animation-delay:.5s"><svg class="w-7 h-7 text-amber-500 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l-1 8h8l-1-8M6 14h12M6 18h12"/><path d="M8 22h8"/></svg><span class="text-xs md:text-sm font-semibold text-amber-800">Nutrients</span></div>
+            <span class="formula-el font-display text-2xl font-light text-sg-mist" style="animation-delay:.65s">+</span>
+            <div class="formula-el p-5 md:p-7 rounded-2xl bg-sky-50/70 border border-sky-100/80 min-w-[88px]" style="animation-delay:.8s"><svg class="w-7 h-7 text-sky-500 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1111 8H2m10.66 4.34a2 2 0 11-1.34 3.66H22"/></svg><span class="text-xs md:text-sm font-semibold text-sky-800">Oxygen</span></div>
+            <span class="formula-el font-display text-2xl font-light text-sg-mist" style="animation-delay:.95s">+</span>
+            <div class="formula-el p-5 md:p-7 rounded-2xl bg-yellow-50/70 border border-yellow-100/80 min-w-[88px]" style="animation-delay:1.1s"><svg class="w-7 h-7 text-yellow-500 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span class="text-xs md:text-sm font-semibold text-yellow-800">Light</span></div>
+        </div>
+        <div class="formula-el mt-8 mb-8 flex items-center justify-center gap-3" style="animation-delay:1.3s">
+            <div class="w-10 h-px bg-sg-sage/40"></div>
+            <svg class="w-5 h-5 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            <div class="w-10 h-px bg-sg-sage/40"></div>
+        </div>
+        <div class="formula-el inline-flex flex-col items-center p-6 md:p-8 rounded-2xl bg-sg-pine/10 border-2 border-sg-pine/20" style="animation-delay:1.45s">
+            <svg class="w-9 h-9 text-sg-pine mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2 2 3.4-.8 1.1-2 1.8-3.4 2C6.2 12.4 5.5 9 9.5 9.4z"/></svg>
+            <span class="font-display text-lg md:text-xl font-medium text-sg-deep">Plant Growth</span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6 mt-14 text-left">
+            <div class="rv d1"><h3 class="text-sm font-semibold text-sg-deep">No Soil</h3><p class="mt-1.5 text-xs font-light text-sg-charcoal leading-relaxed">Plants grow in nutrient-rich water instead of soil</p></div>
+            <div class="rv d2"><h3 class="text-sm font-semibold text-sg-deep">Faster Growth</h3><p class="mt-1.5 text-xs font-light text-sg-charcoal leading-relaxed">Nutrients go directly to the roots, speeding up growth</p></div>
+            <div class="rv d3"><h3 class="text-sm font-semibold text-sg-deep">Clean &amp; Compact</h3><p class="mt-1.5 text-xs font-light text-sg-charcoal leading-relaxed">No dirt, no mess — perfect for indoor spaces</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SMART AUTOMATION ═══ -->
+<section id="automation" class="py-20 md:py-32 px-5 md:px-10 bg-sg-deep overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-6">
+            <div class="rv mb-4"><span class="eyebrow justify-center text-[10px] font-semibold tracking-[.18em] uppercase text-sg-mint"><svg class="text-sg-mint"><use href="#ic-leaf"/></svg>Technology</span></div>
+            <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-white leading-[1.05]">Smart <span class="italic text-sg-mint">automation</span></h2>
+            <p class="rv d2 mt-5 text-sm font-light text-white/40 max-w-lg mx-auto leading-relaxed">SmartGrow handles the complexity. You enjoy the results.</p>
+        </div>
+        <div class="rv d3 flex flex-col items-center gap-2.5 mb-12">
+            <div class="flex items-center gap-2.5 border border-white/10 rounded-full px-5 py-2 bg-white/5 backdrop-blur-sm"><svg class="w-3.5 h-3.5 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span class="text-[10px] font-semibold tracking-wider uppercase text-white/75">SmartGrow System</span></div>
+            <svg class="w-3.5 h-3.5 text-sg-sage/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14"/></svg>
+            <div class="flex items-center gap-2.5 border border-white/10 rounded-full px-5 py-2 bg-white/5 backdrop-blur-sm"><svg class="w-3.5 h-3.5 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg><span class="text-[10px] font-semibold tracking-wider uppercase text-white/75">Smart Automation</span></div>
+            <svg class="w-3.5 h-3.5 text-sg-sage/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14"/></svg>
+            <div class="flex items-center gap-2.5 border border-white/10 rounded-full px-5 py-2 bg-white/5 backdrop-blur-sm"><svg class="w-3.5 h-3.5 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span class="text-[10px] font-semibold tracking-wider uppercase text-white/75">Mobile App</span></div>
+            <svg class="w-3.5 h-3.5 text-sg-sage/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14"/></svg>
+            <div class="flex items-center gap-2.5 border border-sg-sage/25 rounded-full px-5 py-2 bg-sg-sage/10 backdrop-blur-sm"><svg class="w-3.5 h-3.5 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">Control</span></div>
+        </div>
+        <div class="rv-s img-reveal rounded-2xl overflow-hidden shadow-2xl shadow-black/30 max-w-4xl mx-auto mb-14">
+            <img src="images/hero.jpg" alt="SmartGrow System with Smart Automation" class="w-full aspect-video object-cover" loading="lazy" decoding="async" width="1200" height="675" />
+        </div>
+        <h3 class="rv text-center font-display text-xl md:text-2xl font-medium text-white tracking-tight mb-10">Control from your phone</h3>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14">
+            <div class="rv-l relative flex-shrink-0 w-[200px] sm:w-[230px] md:w-[250px]" style="transform:rotate(-3deg)">
+                <div class="phone-glow"></div>
+                <div class="float-a"><div class="phone"><div class="phone-screen aspect-[9/19.5]"><img src="images/app-screen-1.jpg" alt="SmartGrow App — Device Control" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" width="500" height="1080" /></div></div></div>
+            </div>
+            <div class="rv-r relative flex-shrink-0 w-[200px] sm:w-[230px] md:w-[250px]" style="transform:rotate(3deg)">
+                <div class="phone-glow"></div>
+                <div class="float-b"><div class="phone"><div class="phone-screen aspect-[9/19.5]"><img src="images/app-screen-2.jpg" alt="SmartGrow App — Garden Conditions" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" width="500" height="1080" /></div></div></div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3 mt-14">
+            <div class="rv d1 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-yellow-400 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/></svg><h4 class="text-[10px] font-medium text-white/80">Grow Light</h4></div>
+            <div class="rv d2 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-cyan-400 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.59 4.59A2 2 0 1111 8H2"/></svg><h4 class="text-[10px] font-medium text-white/80">Oxygen Pump</h4></div>
+            <div class="rv d3 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-sg-sage mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg><h4 class="text-[10px] font-medium text-white/80">Auto Mode</h4></div>
+            <div class="rv d4 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-violet-400 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><h4 class="text-[10px] font-medium text-white/80">Scheduling</h4></div>
+            <div class="rv d5 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-blue-400 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><h4 class="text-[10px] font-medium text-white/80">Device Status</h4></div>
+            <div class="rv d6 feat text-center p-3 rounded-lg bg-white/5 border border-white/10"><svg class="w-4 h-4 text-emerald-400 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg><h4 class="text-[10px] font-medium text-white/80">Conditions</h4></div>
+            <div class="rv d6 feat text-center p-3 rounded-lg bg-white/5 border border-white/10 col-span-2 sm:col-span-1"><svg class="w-4 h-4 text-sg-mint mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg><h4 class="text-[10px] font-medium text-white/80">Smart Control</h4></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ REAL INSTALLATIONS ═══ -->
+<section id="installations" class="py-20 md:py-32 px-5 md:px-10 bg-sg-cream">
+    <div class="max-w-6xl mx-auto">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-sage"><svg class="text-sg-sage"><use href="#ic-leaf"/></svg>Installations</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-sg-deep leading-[1.05]">Real <span class="italic text-sg-pine">installations</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-sg-charcoal max-w-md leading-relaxed">SmartGrow systems installed and operating in real spaces.</p>
+        <div class="mt-12 grid md:grid-cols-5 gap-4 md:gap-5">
+            <div class="rv md:col-span-3 img-reveal rounded-2xl overflow-hidden shadow-lg">
+                <img src="images/install-campus.jpg" alt="SmartGrow Campus Installation" class="w-full aspect-[4/3] md:aspect-auto md:h-full object-cover" loading="lazy" decoding="async" width="800" height="600" />
+                <div class="p-5 md:p-6"><h3 class="font-display text-xl font-medium text-sg-deep">Campus Setup</h3><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">SmartGrow Installation</span></div>
+            </div>
+            <div class="rv d2 md:col-span-2 img-reveal rounded-2xl overflow-hidden shadow-lg">
+                <img src="images/install-client.jpg" alt="SmartGrow Client Installation" class="w-full aspect-[4/3] md:aspect-auto md:h-full object-cover" loading="lazy" decoding="async" width="600" height="450" />
+                <div class="p-5 md:p-6"><h3 class="font-display text-xl font-medium text-sg-deep">Client Installation</h3><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-sage">SmartGrow Installation</span></div>
+            </div>
+        </div>
+        <div class="grid grid-cols-4 gap-4 mt-8">
+            <div class="rv d1 text-center"><svg class="w-5 h-5 text-sg-pine mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span class="text-[11px] font-medium text-sg-charcoal">Homes</span></div>
+            <div class="rv d2 text-center"><svg class="w-5 h-5 text-sg-pine mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg><span class="text-[11px] font-medium text-sg-charcoal">Offices</span></div>
+            <div class="rv d3 text-center"><svg class="w-5 h-5 text-sg-pine mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></svg><span class="text-[11px] font-medium text-sg-charcoal">Education</span></div>
+            <div class="rv d4 text-center"><svg class="w-5 h-5 text-sg-pine mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg><span class="text-[11px] font-medium text-sg-charcoal">Commercial</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ HARVEST ═══ -->
+<section id="harvest" class="relative py-28 md:py-44 px-5 md:px-10 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="images/plant-spinach.jpg" alt="Spinach harvest" class="w-full h-full object-cover" loading="lazy" decoding="async" width="1200" height="800" />
+        <div class="absolute inset-0 bg-gradient-to-b from-sg-deep/80 via-sg-deep/70 to-sg-deep/85"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+        <div class="rv mb-5"><span class="eyebrow justify-center text-[10px] font-semibold tracking-[.18em] uppercase text-sg-mint"><svg class="text-sg-mint"><use href="#ic-leaf"/></svg>Harvest</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.9rem] font-medium tracking-tight text-white leading-[1.08]">Grown by SmartGrow.<br/><span class="italic text-sg-mint">Harvested by you.</span></h2>
+        <p class="rv d2 mt-6 text-sm font-light text-white/40 max-w-md mx-auto leading-relaxed">Fresh, clean, real produce — grown indoors, harvested by hand.</p>
+        <div class="rv d3 mt-5 inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-1.5 bg-white/5 backdrop-blur-sm">
+            <div class="w-1.5 h-1.5 rounded-full bg-sg-sage"></div>
+            <span class="text-[10px] font-semibold tracking-wider uppercase text-white/60">Real SmartGrow Photograph</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery" class="py-20 md:py-32 px-5 md:px-10 bg-sg-linen">
+    <div class="max-w-6xl mx-auto">
+        <div class="rv mb-4"><span class="eyebrow text-[10px] font-semibold tracking-[.18em] uppercase text-sg-sage"><svg class="text-sg-sage"><use href="#ic-leaf"/></svg>Portfolio</span></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-[3.8rem] font-medium tracking-tight text-sg-deep leading-[1.05]">Photo <span class="italic text-sg-pine">gallery</span></h2>
+        <div class="flex flex-wrap gap-2 mt-8 mb-10 rv d2" id="gal-filters">
+            <button data-f="all" class="gf active text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-sg-deep text-white border-sg-deep">All</button>
+            <button data-f="system" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">System</button>
+            <button data-f="plants" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">Plants</button>
+            <button data-f="growth" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">Growth</button>
+            <button data-f="installations" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">Installations</button>
+            <button data-f="automation" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">Automation</button>
+            <button data-f="app" class="gf text-[10px] font-semibold tracking-wider uppercase px-3.5 py-1.5 rounded-full border transition-all bg-white text-sg-stone border-sg-sand hover:border-sg-sage">App</button>
+        </div>
+        <div id="gal-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"></div>
+    </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="py-24 md:py-40 px-5 md:px-10 bg-sg-deep">
+    <div class="max-w-3xl mx-auto text-center">
+        <div class="rv w-12 h-12 rounded-2xl bg-white/[.08] flex items-center justify-center mx-auto mb-6"><svg class="w-6 h-6 text-sg-sage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2 2 3.4-.8 1.1-2 1.8-3.4 2C6.2 12.4 5.5 9 9.5 9.4z"/></svg></div>
+        <h2 class="rv d1 font-display text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-white leading-[1.05]">Ready to <span class="italic text-sg-mint">grow?</span></h2>
+        <p class="rv d2 mt-5 text-sm font-light text-white/45 max-w-md mx-auto leading-relaxed">Want to know more about SmartGrow or get a system for your space?</p>
+        <a href="https://wa.me/919370023258?text=Hi%20SmartGrow!%20I%27d%20like%20to%20learn%20more%20about%20getting%20a%20system." target="_blank" rel="noopener" class="rv d3 btn-wa inline-flex items-center gap-2.5 mt-8 bg-[#25D366] text-white text-sm font-semibold tracking-wider uppercase px-8 py-4 rounded-full shadow-lg shadow-[#25D366]/20">
+            <svg class="w-5 h-5"><use href="#ic-wa"/></svg>
+            WhatsApp SmartGrow
+        </a>
+        <div class="rv d4 mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+            <div class="flex items-center gap-2"><svg class="w-4 h-4 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><span class="text-sm font-light text-white/55">+91 93700 23258</span></div>
+            <a href="https://instagram.com/smartgrow_automation" target="_blank" rel="noopener" class="flex items-center gap-2 group"><svg class="w-4 h-4 text-white/30 group-hover:text-pink-400 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg><span class="text-sm font-light text-white/55 group-hover:text-pink-400 transition-colors">@smartgrow_automation</span></a>
+        </div>
+        <div class="rv d5 mt-5 flex items-center justify-center gap-1.5"><svg class="w-3.5 h-3.5 text-white/20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="text-xs font-light text-white/25">SmartGrow · Navi Mumbai</span></div>
+        <p class="rv d6 mt-8 text-[10px] font-light text-white/15">Assets by Sweekriti</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-6 px-5 bg-sg-deep border-t border-white/[.04]">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <span class="text-[10px] font-light text-white/20">© <span id="yr">2026</span> SmartGrow</span>
+        <span class="text-[10px] font-light text-white/20">Navi Mumbai</span>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919370023258?text=Hi%20SmartGrow!" target="_blank" rel="noopener" class="wa-btn fixed bottom-5 right-4 z-50 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg shadow-[#25D366]/25" aria-label="WhatsApp" style="width:52px;height:52px">
+    <svg class="w-6 h-6 text-white"><use href="#ic-wa"/></svg>
+</a>
+
+<!-- Back to top — leaf ring fills as you scroll -->
+<button id="toTop" aria-label="Back to top">
+    <svg class="ring" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><circle class="bg" cx="24" cy="24" r="20"/><circle class="fg" cx="24" cy="24" r="20"/></svg>
+    <svg class="lf" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-leaf"/></svg>
+</button>
+
+<!-- Lightbox -->
+<div id="lb" class="lb" onclick="lbClose(event)" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button onclick="lbClose(event)" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Close"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button onclick="lbPrev(event)" class="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Previous"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button onclick="lbNext(event)" class="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Next"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="flex items-center justify-center min-h-screen px-14 md:px-20 py-20">
+        <img id="lb-img" src="" alt="" class="lb-img max-w-full max-h-[80vh] object-contain rounded-lg" />
+    </div>
+    <p id="lb-cap" class="absolute bottom-6 left-0 right-0 text-center text-sm font-light text-white/60"></p>
+</div>
+
+<script>
+// ── Marquee: the whole garden in one strip ──
+const PLANTS=['Basil','Spinach','Tulsi','Lemongrass','Peppermint','Coriander','Amaranth','Butterhead','Rocket','Kale','Fenugreek','Thai Basil','Spearmint','Pak Choi','Oregano','Dill'];
+const mqTrack=document.getElementById('mq-track');
+function buildMarquee(){
+    const seq=PLANTS.map(p=>`<span class="mq-item"><span class="font-display italic text-lg text-white/55">${p}</span><svg class="w-3 h-3 text-sg-sage/60"><use href="#ic-leaf"/></svg></span>`).join('');
+    mqTrack.innerHTML=seq+seq; // duplicate for seamless loop
+}
+buildMarquee();
+
+// ── Gallery Data ──
+const G=[
+{src:'images/system-unit.jpg',cat:'system',cap:'SmartGrow Growing Unit',tall:1},
+{src:'images/hero.jpg',cat:'automation',cap:'SmartGrow System Overview',tall:0},
+{src:'images/plant-basil.jpg',cat:'plants',cap:'Basil — Grown with SmartGrow',tall:1},
+{src:'images/plant-spinach.jpg',cat:'plants',cap:'Spinach — Grown with SmartGrow',tall:0},
+{src:'images/plant-amaranthus.jpg',cat:'plants',cap:'Amaranthus — Grown with SmartGrow',tall:1},
+{src:'images/plant-italian-basil.jpg',cat:'plants',cap:'Italian Basil — Grown with SmartGrow',tall:0},
+{src:'images/tea-collection.jpg',cat:'growth',cap:'Tea Collection',tall:0},
+{src:'images/plant-varieties.jpg',cat:'growth',cap:'Plant Varieties',tall:0},
+{src:'images/install-campus.jpg',cat:'installations',cap:'Campus Setup',tall:0},
+{src:'images/install-client.jpg',cat:'installations',cap:'Client Installation',tall:1},
+{src:'images/app-screen-1.jpg',cat:'app',cap:'SmartGrow App — Device Control',tall:1},
+{src:'images/app-screen-2.jpg',cat:'app',cap:'SmartGrow App — Garden Conditions',tall:1}
+];
+
+const galGrid=document.getElementById('gal-grid');
+let curF='all',vis=[...G],lbIdx=0;
+
+function renderGal(f){
+    curF=f;galGrid.innerHTML='';
+    vis=f==='all'?[...G]:G.filter(i=>i.cat===f);
+    vis.forEach((item,idx)=>{
+        const d=document.createElement('div');
+        const cls=item.tall?'col-span-1 row-span-2 aspect-[3/4]':'aspect-[4/3]';
+        d.className='gal-item '+cls+' bg-sg-sand/50';
+        d.style.opacity='0';d.style.transform='translateY(18px) scale(.97)';
+        d.innerHTML=`<div class="w-full h-full bg-sg-sand/30" style="min-height:120px"></div><div class="gal-over"></div><div class="gal-cap"><p class="text-xs font-medium text-white leading-tight">${item.cap}</p><span class="text-[10px] font-semibold tracking-wider uppercase text-sg-mint">SmartGrow</span></div>`;
+        d.tabIndex=0;d.setAttribute('role','button');d.setAttribute('aria-label','Open photo: '+item.cap);
+        d.addEventListener('click',()=>lbOpen(idx));d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();lbOpen(idx)}});
+        galGrid.appendChild(d);
+        requestAnimationFrame(()=>{setTimeout(()=>{d.style.transition='opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)';d.style.opacity='1';d.style.transform='translateY(0) scale(1)'},idx*55)});
+        const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){const img=new Image();img.src=item.src;img.alt=item.cap;img.loading='lazy';img.decoding='async';img.className='w-full h-full object-cover';img.style.opacity='0';img.style.transition='opacity .5s';img.onload=()=>{img.style.opacity='1'};d.firstChild.replaceWith(img);io.disconnect()}},{rootMargin:'200px'});io.observe(d);
+    });
+}
+renderGal('all');
+
+document.querySelectorAll('.gf').forEach(b=>{b.addEventListener('click',()=>{
+    document.querySelectorAll('.gf').forEach(x=>{x.classList.remove('bg-sg-deep','text-white','border-sg-deep','active');x.classList.add('bg-white','text-sg-stone','border-sg-sand')});
+    b.classList.remove('bg-white','text-sg-stone','border-sg-sand');b.classList.add('bg-sg-deep','text-white','border-sg-deep','active');
+    renderGal(b.dataset.f);
+})});
+
+// ── Lightbox ──
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
+function lbOpen(i){lbIdx=i;lbUp();lb.classList.add('open');document.body.style.overflow='hidden'}
+function lbClose(e){if(e.target===lb||e.currentTarget.tagName==='BUTTON'){lb.classList.remove('open');document.body.style.overflow=''}}
+function lbPrev(e){e.stopPropagation();lbIdx=(lbIdx-1+vis.length)%vis.length;lbUp()}
+function lbNext(e){e.stopPropagation();lbIdx=(lbIdx+1)%vis.length;lbUp()}
+function lbUp(){const i=vis[lbIdx];lbImg.style.opacity='0';lbImg.style.transform='scale(.96)';setTimeout(()=>{lbImg.src=i.src;lbImg.alt=i.cap;lbCap.textContent=i.cap;lbImg.style.opacity='1';lbImg.style.transform='scale(1)'},120)}
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow=''}if(e.key==='ArrowLeft')lbPrev(e);if(e.key==='ArrowRight')lbNext(e)});
+let tsx=0;lb.addEventListener('touchstart',e=>{tsx=e.changedTouches[0].screenX},{passive:true});lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-tsx;if(Math.abs(d)>50){if(d>0)lbIdx=(lbIdx-1+vis.length)%vis.length;else lbIdx=(lbIdx+1)%vis.length;lbUp()}},{passive:true});
+
+// ── Scroll Reveal ──
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rv-s,.rv-l,.rv-r').forEach(el=>ro.observe(el));
+
+// ── Formula animation trigger ──
+const fEl=document.getElementById('formula');
+if(fEl){const fo=new IntersectionObserver(([e])=>{if(e.isIntersecting){fEl.querySelectorAll('.formula-el').forEach(el=>el.style.animationPlayState='running');fo.disconnect()}},{threshold:.2});fo.observe(fEl);fEl.querySelectorAll('.formula-el').forEach(el=>el.style.animationPlayState='paused')}
+
+// ── Scroll effects: nav, hero parallax, back-to-top (one rAF-throttled handler) ──
+const nav=document.getElementById('nav'),nLogo=document.getElementById('nav-logo'),nLks=document.querySelectorAll('.nav-lk');
+const hPar=document.getElementById('hero-par');
+const toTop=document.getElementById('toTop'),ringFg=toTop.querySelector('.fg');
+const RING_LEN=126; // 2*PI*20 — matches stroke-dasharray in CSS
+const noMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let navSolid=null,ticking=false;
+function onScroll(){
+    const y=window.scrollY;
+    const solid=y>60;
+    if(solid!==navSolid){
+        navSolid=solid;
+        nav.classList.toggle('nav-solid',solid);
+        nLogo.classList.toggle('text-white',!solid);nLogo.classList.toggle('text-sg-deep',solid);
+        nLks.forEach(l=>{['text-white/60','hover:text-white'].forEach(c=>l.classList.toggle(c,!solid));['text-sg-charcoal/60','hover:text-sg-deep'].forEach(c=>l.classList.toggle(c,solid))});
+    }
+    if(!noMotion&&y<window.innerHeight)hPar.style.transform=`translate3d(0,${y*.12}px,0)`;
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    ringFg.style.strokeDashoffset=RING_LEN*(1-(max>0?Math.min(y/max,1):0));
+    toTop.classList.toggle('show',y>420);
+    ticking=false;
+}
+window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+window.addEventListener('resize',onScroll,{passive:true});
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:noMotion?'auto':'smooth'}));
+onScroll();
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// ── Mobile menu ──
+const mBtn=document.getElementById('menu-btn'),mO=document.getElementById('menu-overlay'),mP=document.getElementById('menu-panel');
+let mOpen=false;
+function toggleMenu(){mOpen=!mOpen;mBtn.setAttribute('aria-expanded',mOpen);document.body.classList.toggle('menu-open',mOpen);document.body.style.overflow=mOpen?'hidden':'';const b1=document.getElementById('bar1'),b2=document.getElementById('bar2');if(mOpen){b1.style.transform='rotate(45deg) translateY(3px)';b2.style.transform='rotate(-45deg) translateY(-3px)'}else{b1.style.transform='';b2.style.transform=''}}
+function closeMenu(){mOpen=false;mBtn.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');document.body.style.overflow='';document.getElementById('bar1').style.transform='';document.getElementById('bar2').style.transform=''}
+mBtn.addEventListener('click',toggleMenu);mO.addEventListener('click',closeMenu);
+
+// ── Service worker: makes the site installable and always fresh ──
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => reg.update()).catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
